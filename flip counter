@@ -19,14 +19,16 @@ architecture archi of flip_counter is
   
 begin
 
-   SYNC_PROC: process (reset)
+   SYNC_PROC: process (ck,reset)
    begin
-      
-         if (reset = '1') then
-            state <= S0;          
-          else
-            state <= next_state;               
-         end if;
+   
+      if (reset = '0') then
+      	if (ck'event and ck = '1') then
+            state <= next_state; 
+          end if;         
+      else
+         state <= s0;               
+      end if;
       
    end process;
 
